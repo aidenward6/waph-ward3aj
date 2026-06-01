@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WAPH Lab 2 - ward3aj</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .clock-face { width: 150px; height: 150px; border: 5px solid black; border-radius: 50%; position: relative; margin-top: 10px; }
+        .hand { width: 50%; height: 2px; background: black; position: absolute; top: 50%; transform-origin: 100%; transform: rotate(90deg); transition: all 0.05s; }
+        h1 { color: #0056b3; }
+    </style>
+</head>
+<body>
+
+    <h1 style="text-decoration: underline;">Web Application Programming and Hacking</h1> 
+    <p>Instructor: Dr. Phu Phung | Student: Aiden Ward (ward3aj)</p>
+    <img src="headshot.jpeg" width="150" alt="My headshot">
+
+    <hr>
+    <h3>JavaScript & jQuery Exercises</h3>
+    <button class="btn btn-primary" onclick="alert(new Date())">Show Date/Time</button>
+    <input type="text" onkeydown="console.log('Key pressed: ' + event.key)" placeholder="Type here to log keys">
+
+    <div id="digital-clock"></div>
+    <script>
+        function updateClock() {
+            document.getElementById('digital-clock').innerHTML = new Date().toLocaleTimeString();
+        }
+        setInterval(updateClock, 1000);
+    </script>
+
+    <p onclick="toggleEmail()" style="cursor:pointer; color:blue;">Click to show/hide email</p>
+    <div id="email" style="display:none;">ward3aj@mail.uc.edu</div>
+    <script src="script.js"></script>
+
+    <div class="clock-face">
+        <div class="hand" id="hour" style="height:4px;"></div>
+        <div class="hand" id="min"></div>
+        <div class="hand" id="sec" style="background:red;"></div>
+    </div>
+    <script src="analog.js"></script>
+
+    <hr>
+    <h3>Ajax & jQuery Testing</h3>
+    <div>
+        Input for Ajax: <input type="text" id="ajax-input">
+        <button onclick="sendAjax()">Send Ajax Request</button>
+        <div id="ajax-result" class="mt-2 text-primary"></div>
+    </div>
+
+    <div class="mt-4">
+        <input type="text" id="jquery-input-1" placeholder="jQuery 1">
+        <button id="btn-1" class="btn btn-secondary">jQuery Ajax 1</button>
+        <div id="jquery-result-1" class="mt-2 text-secondary"></div>
+        <br>
+        <input type="text" id="jquery-input-2" placeholder="jQuery 2">
+        <button id="btn-2" class="btn btn-secondary">jQuery Ajax 2</button>
+        <div id="jquery-result-2" class="mt-2 text-secondary"></div>
+    </div>
+
+    <hr>
+    <h3>Task 2d: Web API Integration</h3>
+    <div class="card p-3 mb-3">
+        <h5>Programming Joke</h5>
+        <div id="joke-container">Loading joke...</div>
+    </div>
+
+    <div class="card p-3">
+        <h5>Age Predictor</h5>
+        <input type="text" id="name-input" placeholder="Enter a name">
+        <button onclick="getAge()" class="btn btn-warning mt-2">Predict Age</button>
+        <div id="age-result" class="mt-2 font-weight-bold"></div>
+    </div>
+
+    <script>
+        function sendAjax() {
+            var input = document.getElementById("ajax-input").value;
+            $.ajax({ url: "/echo.php", type: "GET", data: { data: input }, success: function(res) { $("#ajax-result").html(res); } });
+        }
+
+        $(document).ready(function(){
+            $("#btn-1").click(function(){ $.ajax({ url: "/echo.php", type: "GET", data: { name: $("#jquery-input-1").val() }, success: function(res){ $("#jquery-result-1").html(res); } }); });
+            $("#btn-2").click(function(){ $.ajax({ url: "/echo.php", type: "GET", data: { name: $("#jquery-input-2").val() }, success: function(res){ $("#jquery-result-2").html(res); } }); });
+            
+            $.ajax({ url: "https://v2.jokeapi.dev/joke/Programming?type=single", success: function(data) { $("#joke-container").text(data.joke); } });
+        });
+
+        function getAge() {
+            const name = $("#name-input").val();
+            fetch(`https://api.agify.io/?name=${name}`)
+                .then(response => response.json())
+                .then(data => { $("#age-result").text(`Predicted age for ${data.name}: ${data.age}`); });
+        }
+    </script>
+</body>
+</html>
