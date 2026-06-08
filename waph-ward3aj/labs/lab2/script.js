@@ -9,7 +9,7 @@ function sendAjax() {
     
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("ajax-result").textContent = this.responseText;
+            document.getElementById("ajax-result").innerHTML = this.responseText;
         }
     };
     
