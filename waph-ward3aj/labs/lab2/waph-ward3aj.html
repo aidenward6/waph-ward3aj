@@ -24,7 +24,7 @@
     <div id="digital-clock"></div>
     <script>
         function updateClock() {
-            document.getElementById('digital-clock').textContent = new Date().toLocaleTimeString();
+            document.getElementById('digital-clock').innerHTML = new Date().toLocaleTimeString();
         }
         setInterval(updateClock, 1000);
     </script>
@@ -75,12 +75,12 @@
     <script>
         function sendAjax() {
             var input = document.getElementById("ajax-input").value;
-            $.ajax({ url: "/echo.php", type: "GET", data: { data: input }, success: function(res) { $("#ajax-result").text(res); } });
+            $.ajax({ url: "/echo.php", type: "GET", data: { data: input }, success: function(res) { $("#ajax-result").html(res); } });
         }
 
         $(document).ready(function(){
-            $("#btn-1").click(function(){ $.ajax({ url: "/echo.php", type: "GET", data: { name: $("#jquery-input-1").val() }, success: function(res){ $("#jquery-result-1").text(res); } }); });
-            $("#btn-2").click(function(){ $.ajax({ url: "/echo.php", type: "GET", data: { name: $("#jquery-input-2").val() }, success: function(res){ $("#jquery-result-2").text(res); } }); });
+            $("#btn-1").click(function(){ $.ajax({ url: "/echo.php", type: "GET", data: { name: $("#jquery-input-1").val() }, success: function(res){ $("#jquery-result-1").html(res); } }); });
+            $("#btn-2").click(function(){ $.ajax({ url: "/echo.php", type: "GET", data: { name: $("#jquery-input-2").val() }, success: function(res){ $("#jquery-result-2").html(res); } }); });
             
             $.ajax({ url: "https://v2.jokeapi.dev/joke/Programming?type=single", success: function(data) { $("#joke-container").text(data.joke); } });
         });
@@ -94,4 +94,3 @@
     </script>
 </body>
 </html>
-
