@@ -5,11 +5,15 @@ function toggleEmail() {
 
 function sendAjax() {
     var input = document.getElementById("ajax-input").value;
-    var xhttp = new XMLHttpRequest();
     
+    // validate input is not empty
+    if (!input || input.trim().length === 0) return;
+
+    var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("ajax-result").innerHTML = this.responseText;
+            // use textcontent to render as plain text, not html
+            document.getElementById("ajax-result").textContent = this.responseText;
         }
     };
     
