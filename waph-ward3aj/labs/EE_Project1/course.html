@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WAPH Course</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=999.0">
+</head>
+<body class="container mt-5 mb-5">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 px-3 rounded">
+        <a class="navbar-brand fw-bold" href="#">WAPH</a>
+        <a class="nav-link text-light ms-auto" href="index.html">← Back to Profile</a>
+    </nav>
+
+    <h1 class="fw-bold">Web Application Programming and Hacking</h1>
+    <p class="text-muted mb-1">Instructor: Dr. Phu Phung &nbsp;|&nbsp; University of Cincinnati</p>
+    <p class="text-muted mb-4">Student: Aiden Ward &mdash; ward3aj@mail.uc.edu</p>
+
+    <p>
+        WAPH is a hands-on course covering front-end web development, asynchronous JavaScript,
+        public API integration, and web security. Projects range from building interactive
+        profile pages to performing and defending against real cross-site scripting (XSS) attacks.
+    </p>
+
+    <hr class="my-4">
+
+    <section class="mb-5">
+        <h2 class="fw-bold">Lab 2 – Front-end Web Development</h2>
+        <p>
+            In Lab 2, I built a front-end web page from scratch using HTML, CSS, and JavaScript,
+            and integrated it with external APIs. The lab covered two main areas:
+        </p>
+
+        <h5 class="fw-semibold mt-3">Task 1: Basic HTML &amp; JavaScript</h5>
+        <ul>
+            <li>Built a base HTML page with a headshot, form, and multiple JavaScript features.</li>
+            <li>Used <strong>inline JavaScript</strong> to display the current date/time on click and log keypresses to the console.</li>
+            <li>Implemented a <strong>digital clock</strong> via <code>setInterval</code> inside a <code>&lt;script&gt;</code> tag.</li>
+            <li>Added a show/hide email toggle using an external JavaScript file.</li>
+            <li>Rendered an <strong>analog clock</strong> using an external <code>analog.js</code> file with canvas-based hand rotation.</li>
+        </ul>
+
+        <h5 class="fw-semibold mt-3">Task 2: Ajax, CSS, jQuery, and Web API Integration</h5>
+        <ul>
+            <li>Applied all three CSS types: inline, internal <code>&lt;style&gt;</code> block, and external via Bootstrap CDN.</li>
+            <li>Used <strong>XMLHttpRequest</strong> to send an Ajax GET request to <code>echo.php</code>, then inspected the 200 OK response in the browser network tab.</li>
+            <li>Re-implemented both Ajax calls using <strong>jQuery</strong> (<code>$.ajax()</code>) with two separate buttons, drastically reducing code length.</li>
+            <li>Integrated the <strong>JokeAPI</strong> (<code>v2.jokeapi.dev/joke/Programming</code>) using jQuery Ajax to display a random programming joke on page load.</li>
+            <li>Integrated the <strong>Agify API</strong> using the <code>fetch()</code> method with chained <code>.then()</code> handlers — users type a name and get a predicted age back in real time.</li>
+        </ul>
+
+        <p>
+            <a href="https://github.com/aidenward6/waph-ward3aj/tree/main/waph-ward3aj/labs/lab2"
+               target="_blank" class="btn btn-outline-primary btn-sm">View Lab 2 on GitHub</a>
+        </p>
+    </section>
+
+    <hr class="my-4">
+
+    <section class="mb-5">
+        <h2 class="fw-bold">Hackathon 1 – XSS Attacks &amp; Defenses</h2>
+        <p>
+            Hackathon 1 was a full-day exercise in both exploiting and defending against
+            Cross-Site Scripting (XSS) vulnerabilities on a live target application hosted
+            at <code>waph-hackathon.eastus.cloudapp.azure.com/xss</code>.
+        </p>
+
+        <h5 class="fw-semibold mt-3">Task 1: XSS Attack Simulation (Levels 0–6)</h5>
+        <p>
+            Each level of <code>echo.php</code> had a different server-side filtering strategy.
+            I injected payloads to trigger <code>alert()</code> displaying my name, and guessed
+            the underlying PHP source code for levels 2–6:
+        </p>
+        <ul>
+            <li><strong>Level 0–1:</strong> No filtering — basic <code>&lt;script&gt;alert()&lt;/script&gt;</code> payload worked directly.</li>
+            <li><strong>Level 2:</strong> Server reflected input with no sanitization — same direct payload.</li>
+            <li><strong>Level 3:</strong> Server stripped <code>&lt;script&gt;</code> tags — bypassed with case variation or alternative tags (e.g., <code>&lt;img onerror=...&gt;</code>).</li>
+            <li><strong>Level 4:</strong> Keyword blocklist on <code>"script"</code> — bypassed using an event handler attribute that avoids the blocked string.</li>
+            <li><strong>Level 5:</strong> Blocklist also covering <code>"alert"</code> — bypassed by encoding or alternative JS execution methods.</li>
+            <li><strong>Level 6:</strong> Proper <code>htmlspecialchars()</code> encoding — this level was not bypassable; the defense worked correctly.</li>
+        </ul>
+
+        <h5 class="fw-semibold mt-3">Tas

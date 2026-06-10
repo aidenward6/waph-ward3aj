@@ -1,0 +1,33 @@
+* {
+    font-family: 'Inter', sans-serif !important;
+}
+
+body {
+    padding-top: 20px;
+    padding-bottom: 50px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.company-logo {
+    width: 40px !important;
+    height: 40px !important;
+    object-fit: contain !important;
+    margin-right: 15px;
+    background-color: white;
+    border-radius: 4px;
+}
+
+.dark-mode {
+    background-color: #1a1a1a !important;
+    color: #f1f1f1 !important;
+}
+
+.dark-mode .bg-light {
+    background-color: #333 !important;
+    color: #f1f1f1 !important;
+    border-color: #444 !important;
+}
+
+.dark-mode .text-muted {
+    color: #aaa !important;
+}
