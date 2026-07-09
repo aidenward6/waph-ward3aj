@@ -10,7 +10,7 @@
 
 **Short-bio**: Aiden Ward has a lot of interest in computer science, specifically data science. I also love volleyball and cars.
 
-![Aiden's headshot](headshot.jpeg)
+![Aiden's headshot](headshot.jpg)
 
 ## Repository Information
 
